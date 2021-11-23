@@ -79,7 +79,11 @@ app.get("/authorize", (req, res) => {
 })
 
 app.post("/approve", (req, res) => {
-
+	const { userName, password, requestId } = req.body;
+	if ((!userName) || (users[userName] !== password)){
+		res.status(401).send("Error: user not authorized")
+		return;
+	}
 })
 
 const server = app.listen(config.port, "localhost", function () {
