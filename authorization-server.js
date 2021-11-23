@@ -54,6 +54,30 @@ app.use(bodyParser.urlencoded({ extended: true }))
 Your code here
 */
 
+app.get("/authorize", (req, res) => {
+	const client_id = req.query.client_id;
+	const client = clients[client_id];
+	if (!client) {
+		res.status(401).send("Error: client not authroized");
+		return;
+	};
+	if (typeof req.query.scope !== 'string'
+		|| !containsAll(client.scopes, req.query.scope.split(" "))
+	)
+	{
+		res.status(401).send("Error: client not authorized.");
+		return;
+	}
+	const requestId = randomString();
+	requests[requestId] = req.query;
+	res.render("login", {
+		client,
+		scope: req.query.scope,
+		requestId
+    })
+    
+})
+
 const server = app.listen(config.port, "localhost", function () {
 	var host = server.address().address
 	var port = server.address().port
