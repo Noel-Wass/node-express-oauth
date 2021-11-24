@@ -84,11 +84,12 @@ app.post("/approve", (req, res) => {
 		res.status(401).send("Error: user not authorized.")
 		return;
 	}
-	if (!request[requestId]) {
-		res.status(401).send("Error: user not authorized.")
-    }
+	
 	const clientRequest = request[requestId];
 	delete request[requestId];
+	if (!clientRequest) {
+		res.status(401).send("Error: invalid user request.")
+	}
 
 	const code = randomString();
 	authorizationCodes[code] = {
