@@ -84,6 +84,8 @@ app.post("/approve", (req, res) => {
 		res.status(401).send("Error: user not authorized")
 		return;
 	}
+	const clientRequest = request[requestId];
+	delete request[requestId];
 })
 
 const server = app.listen(config.port, "localhost", function () {
