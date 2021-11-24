@@ -10,7 +10,7 @@ it("/approve route verifies the existence of a valid request @authorization-serv
 	const state = "yuiop67890";
 	//redirect_uri: "http://www.my-redirect.com/route"
 	requests[requestId] = {		
-		redirect_uri = "http://localhost:9000/callback",
+		redirect_uri : "http://localhost:9000/callback",
 		state,
 		response_type: "code",
 	}
