@@ -101,7 +101,7 @@ app.post("/approve", (req, res) => {
 		code,
 		state: clientReq.state,
 	}
-	res.redirect(url.format(redirectUri))
+	res.status(200).redirect(url.format(redirectUri))
 	
 })
 
