@@ -86,6 +86,12 @@ app.post("/approve", (req, res) => {
 	}
 	const clientRequest = request[requestId];
 	delete request[requestId];
+
+	const code = randomString();
+	authorizationCodes[code] = {
+		clientRequest,
+		userName
+    }
 })
 
 const server = app.listen(config.port, "localhost", function () {
