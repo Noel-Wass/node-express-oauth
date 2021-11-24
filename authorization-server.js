@@ -58,7 +58,7 @@ app.get("/authorize", (req, res) => {
 	const client_id = req.query.client_id;
 	const client = clients[client_id];
 	if (!client) {
-		res.status(401).send("Error: client not authroized");
+		res.status(401).send("Error: client not authroized.");
 		return;
 	};
 	if (typeof req.query.scope !== 'string'
@@ -81,9 +81,12 @@ app.get("/authorize", (req, res) => {
 app.post("/approve", (req, res) => {
 	const { userName, password, requestId } = req.body;
 	if ((!userName) || (users[userName] !== password)){
-		res.status(401).send("Error: user not authorized")
+		res.status(401).send("Error: user not authorized.")
 		return;
 	}
+	if (!request[requestId]) {
+		res.status(401).send("Error: user not authorized.")
+    }
 	const clientRequest = request[requestId];
 	delete request[requestId];
 
