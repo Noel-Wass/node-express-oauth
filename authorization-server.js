@@ -70,7 +70,7 @@ app.get("/authorize", (req, res) => {
 	}
 	const requestId = randomString();
 	requests[requestId] = req.query;
-	res.render("login", {
+	res.status(200).render("login", {
 		client,
 		scope: req.query.scope,
 		requestId
