@@ -95,7 +95,9 @@ app.post("/approve", (req, res) => {
 	authorizationCodes[code] = {
 		clientRequest,
 		userName
-    }
+	}
+
+	res.status(200);
 })
 
 const server = app.listen(config.port, "localhost", function () {
