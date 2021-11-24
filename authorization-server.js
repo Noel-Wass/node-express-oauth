@@ -86,7 +86,7 @@ app.post("/approve", (req, res) => {
 	}
 	
 	const clientRequest = requests[requestId];
-	delete request[requestId];
+	delete requests[requestId];
 	if (!clientRequest) {
 		res.status(401).send("Error: invalid user request.")
 	}
