@@ -96,8 +96,13 @@ app.post("/approve", (req, res) => {
 		clientRequest,
 		userName
 	}
-
-	res.status(200);
+	const redirectUri = url.parse(clientRequest.redirect_uri)
+	redirectUri.query = {
+		code,
+		state: clientReq.state,
+	}
+	res.redirect(url.format(redirectUri))
+	
 })
 
 const server = app.listen(config.port, "localhost", function () {
