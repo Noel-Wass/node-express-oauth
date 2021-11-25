@@ -14,8 +14,13 @@ it("/approve route stores the request in authorizationCodes @authorization-serve
 
 	const requestId = "asdf4567"
 	const state = "yuiop67890"
+	//const originalClientReq = {
+	//	redirect_uri: "http://www.my-redirect.com/route",
+	//	state,
+	//	response_type: "code",
+	//}
 	const originalClientReq = {
-		redirect_uri: "http://www.my-redirect.com/route",
+		redirect_uri: "http://localhost:9000/callback",
 		state,
 		response_type: "code",
 	}
