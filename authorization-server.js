@@ -18,8 +18,8 @@ const config = {
 
 	clientId: "my-client",
 	clientSecret: "zETqHgl0d7ThysUqPnaFuLOmG1E=",
-	redirectUri: "http://localhost:9000/callback",
-
+	redirectUri_old: "http://www.my-redirect.com/route",
+	redirect_uri:"http://localhost:9000/callback",
 	authorizationEndpoint: "http://localhost:9001/authorize",
 }
 

@@ -3,14 +3,14 @@ const request = require("supertest")
 
 const { app, requests } = require("../../authorization-server")
 const { deleteAllKeys } = require("../../utils")
-
 it("/approve route verifies the existence of a valid request @authorization-server-verify-request-existence", () => {
 	deleteAllKeys(requests)
 	const requestId = "asdf4567";
 	const state = "yuiop67890";
-	//redirect_uri: "http://www.my-redirect.com/route"
+	const redirect_uri =  "http://www.my-redirect.com/route";
+	const redirect_uri2 = "http://localhost:9000/callback";
 	requests[requestId] = {		
-		redirect_uri : "http://localhost:9000/callback",
+		redirect_uri: redirect_uri,
 		state,
 		response_type: "code",
 	}

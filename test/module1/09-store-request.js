@@ -50,8 +50,6 @@ it("/approve route stores the request in authorizationCodes @authorization-serve
 			)
 
 			const { clientRequest, userName } = authorizationCodes[keys[0]]
-			//console.log(`clientReq.state:${clientReq.state}`);
-			//console.log(`originalClientReq.state:${OriginalClientReq.state}`);
 			assert.deepEqual(
 				clientRequest,
 				originalClientReq,
