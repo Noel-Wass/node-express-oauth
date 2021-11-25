@@ -104,6 +104,7 @@ app.post("/approve", (req, res) => {
 	redirectUri.query = {
 		code,
 		state: clientRequest.state,
+		responseType: 'code'
 	}
 	res.status(200).redirect(url.format(redirectUri))
 	
