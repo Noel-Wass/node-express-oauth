@@ -96,15 +96,15 @@ app.post("/approve", (req, res) => {
 	const code = randomString();
 	authorizationCodes[code] = {
 		clientRequest: { ...clientRequest },
-		userName
+		userName,
+		response_type: 'code'
 	}
 	if (clientRequest === undefined)
 		throw new Error('clientRequest is undefined.')
 	const redirectUri = url.parse(clientRequest.redirect_uri)
 	redirectUri.query = {
 		code,
-		state: clientRequest.state,
-		responseType: 'code'
+		state: clientRequest.state,		
 	}
 	res.status(200).redirect(url.format(redirectUri))
 	
