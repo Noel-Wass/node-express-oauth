@@ -3,6 +3,8 @@ const express = require("express")
 const bodyParser = require("body-parser")
 const jwt = require("jsonwebtoken")
 const url = require("url")
+
+
 const {
 	randomString,
 	containsAll,
@@ -70,6 +72,7 @@ app.get("/authorize", (req, res) => {
 		return;
 	}
 	const requestId = randomString();
+	
 	requests[requestId] = req.query;
 	res.status(200).render("login", {
 		client,
@@ -92,21 +95,28 @@ app.post("/approve", (req, res) => {
 		res.status(401).send("Error: invalid user request.")
 		return;
 	}
-
-	const code = randomString();
-	authorizationCodes[code] = {
-		clientRequest: { ...clientRequest },
-		userName,
-		response_type: 'code'
-	}
-	if (clientRequest === undefined)
-		throw new Error('clientRequest is undefined.')
+	const code = randomString()
+	authorizationCodes[code] = { clientRequest, userName }
 	const redirectUri = url.parse(clientRequest.redirect_uri)
 	redirectUri.query = {
 		code,
-		state: clientRequest.state,		
+		state: clientRequest.state,
 	}
-	res.status(200).redirect(url.format(redirectUri))
+	res.redirect(url.format(redirectUri));
+	return;
+	
+	//authorizationCodes[requestId] = {
+	//	clientRequest,
+	//	userName
+	//}
+	//if (clientRequest === undefined)
+	//	throw new Error('clientRequest is undefined.')
+	//const redirectUri = url.parse(clientRequest.redirect_uri)
+	//redirectUri.query = {
+	//	code,
+	//	state: clientRequest.state,		
+	//}
+	//res.status(200).redirect(url.format(redirectUri))
 	
 })
 
