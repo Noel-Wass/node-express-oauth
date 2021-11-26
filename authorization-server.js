@@ -122,8 +122,10 @@ app.post('/token', (req, res) => {
 	if (!code || !authorizationCodes[code]) {
 		res.status(401).send('Error: client not authorized');
 		return;
-	}
-	const obj = authorization[code];
+	};
+	const obj = authorizationCodes[code];
+	delete authorizationCodes[code];
+	
 		
 });
 
