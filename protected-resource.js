@@ -32,7 +32,12 @@ app.use(bodyParser.urlencoded({ extended: true }))
 Your code here
 */
 
-app.get('/user-info', (req, res) => {})
+app.get('/user-info', (req, res) => {
+	if (!req.headers.authorization) {
+		res.status(401).send("Error: not authorized.");
+		return;
+    }
+})
 
 const server = app.listen(config.port, "localhost", function () {
 	var host = server.address().address
