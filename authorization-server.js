@@ -123,12 +123,21 @@ app.post('/token', (req, res) => {
 		res.status(401).send('Error: client not authorized');
 		return;
 	};
-	const obj = authorizationCodes[code];
+	const { userName, clientReq } = authorizationCodes[code];
 	delete authorizationCodes[code];
 
-	const { userName } = obj.userName;
-	const { scope } = obj.clientReq.scope;
-	jwt.sign({ userName, scope }, private_key, 'RS256');
+	const token = jwt.sign(
+		{
+			userName,
+			scope : clientReq.scope
+		},
+		config.privateKey,
+		{
+			algorithm: 'RS256',
+			expiresIn: 300,
+			issuer: 'localhost:' + config.port
+		}
+		);
 		
 });
 
