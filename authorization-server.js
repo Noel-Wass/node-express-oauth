@@ -137,7 +137,8 @@ app.post('/token', (req, res) => {
 			expiresIn: 300,
 			issuer: 'localhost:' + config.port
 		}
-		);
+	);
+	res.status(200).send({ access_token: token, token_type: "Bearer" });
 		
 });
 
