@@ -40,7 +40,7 @@ app.get('/user-info', (req, res) => {
 		return;
 	}
 	var split = authorizationHeader.split(' ');
-	if (split.length !== 2 || split[0] !== 'Bearer') {
+	if (split.length !== 2 || ( split[0] !== 'bearer' && split[0] !== 'Bearer')) {
 		res.status(401).send("Error: client not authorized.");
 		return;
 	}
@@ -56,7 +56,7 @@ app.get('/user-info', (req, res) => {
 		res.status(401).send("Error: client not authorized.");
 		return;
 	}
-	if (userInfo !== null) {
+	if (userInfo === null) {
 		res.status(401).send("Error: client not authorized.");
 		return;
     }
