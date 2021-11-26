@@ -105,12 +105,21 @@ app.post("/approve", (req, res) => {
 	res.redirect(url.format(redirectUri));	
 })
 
+
+app.post('/token', (req, res) => {
+	if (!req.headers.authorization) {
+		res.status(401).send("Error: invalid token request.");
+		return;
+    }
+		
+});
+
+
 const server = app.listen(config.port, "localhost", function () {
 	var host = server.address().address
 	var port = server.address().port
 })
 
-app.post('/token', (req, res) => { });
 
 // for testing purposes
 
