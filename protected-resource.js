@@ -52,7 +52,7 @@ app.get('/user-info', (req, res) => {
 				algorithms: ["RS256"]
 			})
 	}
-	catch {
+	catch (err) {
 		res.status(401).send("Error: client not authorized.");
 		return;
 	}
