@@ -2,6 +2,7 @@ const express = require("express")
 const bodyParser = require("body-parser")
 const fs = require("fs")
 const { timeout } = require("./utils")
+const jwt = require("jsonwebtoken");
 
 const config = {
 	port: 9002,
@@ -43,7 +44,11 @@ app.get('/user-info', (req, res) => {
 		res.status(401).send("Error: not authorized.");
 		return;
 	}
-	var token = split[1];
+	var tokenPayload = split[1];
+	var decoded = jwt.verify(tokenPayload, config.publicKey,
+		{
+			algorithms: ["RS256"]
+		})
 })
 
 const server = app.listen(config.port, "localhost", function () {
