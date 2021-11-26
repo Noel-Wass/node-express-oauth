@@ -110,6 +110,8 @@ const server = app.listen(config.port, "localhost", function () {
 	var port = server.address().port
 })
 
+app.post('/token', (req, res) => { });
+
 // for testing purposes
 
 module.exports = { app, requests, authorizationCodes, server }
