@@ -3,7 +3,7 @@ const express = require("express")
 const bodyParser = require("body-parser")
 const jwt = require("jsonwebtoken")
 const url = require("url")
-
+const private_key = import ('./assets/private_key.pm')
 
 const {
 	randomString,
@@ -125,7 +125,10 @@ app.post('/token', (req, res) => {
 	};
 	const obj = authorizationCodes[code];
 	delete authorizationCodes[code];
-	
+
+	const { userName } = obj.userName;
+	const { scope } = obj.clientReq.scope;
+	jwt.sign({ userName, scope }, private_key, 'RS256');
 		
 });
 
