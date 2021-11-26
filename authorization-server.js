@@ -107,8 +107,15 @@ app.post("/approve", (req, res) => {
 
 
 app.post('/token', (req, res) => {
-	if (!req.headers.authorization) {
-		res.status(401).send("Error: invalid token request.");
+	const authCredentials = req.headers.authorization;
+	if (!authCredentials) {
+		res.status(401).send("Error: not authorized.");
+		return;
+	}
+	const { clientId, clientSecret } = decodeAuthCredentials(authCredentials);
+	const client = clients[clientId];
+	if (!client || client.clientSecret !== clientSecret) {
+		res.status(401).send('Error: client not authorized');
 		return;
     }
 		
