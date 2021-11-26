@@ -33,10 +33,17 @@ Your code here
 */
 
 app.get('/user-info', (req, res) => {
-	if (!req.headers.authorization) {
+	var authorizationHeader = req.headers.authorization;
+	if (!authorizationHeader) {
 		res.status(401).send("Error: not authorized.");
 		return;
-    }
+	}
+	var split = authorizationHeader.split(' ');
+	if (split.length !== 2 || split[0] !== 'Bearer') {
+		res.status(401).send("Error: not authorized.");
+		return;
+	}
+	var token = split[1];
 })
 
 const server = app.listen(config.port, "localhost", function () {
