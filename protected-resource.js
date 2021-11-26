@@ -56,7 +56,7 @@ app.get('/user-info', (req, res) => {
 		res.status(401).send("Error: client not authorized.");
 		return;
 	}
-	if (userInfo === null) {
+	if (userInfo !== null) {
 		res.status(401).send("Error: client not authorized.");
 		return;
     }
