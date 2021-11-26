@@ -36,12 +36,12 @@ Your code here
 app.get('/user-info', (req, res) => {
 	var authorizationHeader = req.headers.authorization;
 	if (!authorizationHeader) {
-		res.status(401).send("Error: not authorized.");
+		res.status(401).send("Error: client not authorized.");
 		return;
 	}
 	var split = authorizationHeader.split(' ');
 	if (split.length !== 2 || split[0] !== 'Bearer') {
-		res.status(401).send("Error: not authorized.");
+		res.status(401).send("Error: client not authorized.");
 		return;
 	}
 	var tokenPayload = split[1];
@@ -53,7 +53,11 @@ app.get('/user-info', (req, res) => {
 			})
 	}
 	catch {
-		res.status(401).send("Error: not authorized.");
+		res.status(401).send("Error: client not authorized.");
+		return;
+	}
+	if (userInfo === null) {
+		res.status(401).send("Error: client not authorized.");
 		return;
     }
 	
