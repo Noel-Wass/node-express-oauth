@@ -45,10 +45,18 @@ app.get('/user-info', (req, res) => {
 		return;
 	}
 	var tokenPayload = split[1];
-	var decoded = jwt.verify(tokenPayload, config.publicKey,
-		{
-			algorithms: ["RS256"]
-		})
+	let userInfo = null;
+	try {
+		userInfo = jwt.verify(tokenPayload, config.publicKey,
+			{
+				algorithms: ["RS256"]
+			})
+	}
+	catch {
+		res.status(401).send("Error: not authorized.");
+		return;
+    }
+	
 })
 
 const server = app.listen(config.port, "localhost", function () {
