@@ -117,7 +117,13 @@ app.post('/token', (req, res) => {
 	if (!client || client.clientSecret !== clientSecret) {
 		res.status(401).send('Error: client not authorized');
 		return;
-    }
+	}
+	const { code } = req.body;
+	if (!code || !authorizationCodes[code]) {
+		res.status(401).send('Error: client not authorized');
+		return;
+	}
+	const obj = authorization[code];
 		
 });
 
