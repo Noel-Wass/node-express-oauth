@@ -88,36 +88,21 @@ app.post("/approve", (req, res) => {
 		res.status(401).send("Error: user not authorized.")
 		return;
 	}
-	console.log(`requestId: ${requestId}`);
-	const clientRequest = requests[requestId];
+	
+	const clientReq = requests[requestId];
 	delete requests[requestId];
-	if (!clientRequest) {
+	if (!clientReq) {
 		res.status(401).send("Error: invalid user request.")
 		return;
 	}
 	const code = randomString()
-	authorizationCodes[code] = { clientRequest, userName }
-	const redirectUri = url.parse(clientRequest.redirect_uri)
+	authorizationCodes[code] = { clientReq, userName }
+	const redirectUri = url.parse(clientReq.redirect_uri)
 	redirectUri.query = {
 		code,
-		state: clientRequest.state,
+		state: clientReq.state,
 	}
-	res.redirect(url.format(redirectUri));
-	return;
-	
-	//authorizationCodes[requestId] = {
-	//	clientRequest,
-	//	userName
-	//}
-	//if (clientRequest === undefined)
-	//	throw new Error('clientRequest is undefined.')
-	//const redirectUri = url.parse(clientRequest.redirect_uri)
-	//redirectUri.query = {
-	//	code,
-	//	state: clientRequest.state,		
-	//}
-	//res.status(200).redirect(url.format(redirectUri))
-	
+	res.redirect(url.format(redirectUri));	
 })
 
 const server = app.listen(config.port, "localhost", function () {

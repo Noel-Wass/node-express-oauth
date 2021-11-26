@@ -15,12 +15,6 @@ it("/approve route stores the request in authorizationCodes @authorization-serve
 	const requestId = "asdf4567"
 	const state = "yuiop67890"
 
-	
-	//const originalClientReq = {
-	//	redirect_uri: "http://www.my-redirect.com/route",
-	//	state,
-	//	response_type: "code",
-	//}
 	const originalClientReq = {
 		redirect_uri: "http://localhost:9000/callback",
 		state,
@@ -49,9 +43,9 @@ it("/approve route stores the request in authorizationCodes @authorization-serve
 				"Only a single object should be stored in the `authorizationCodes` variable for each request made"
 			)
 
-			const { clientRequest, userName } = authorizationCodes[keys[0]]
+			const { clientReq, userName } = authorizationCodes[keys[0]]
 			assert.deepEqual(
-				clientRequest,
+				clientReq,
 				originalClientReq,
 				`"clientReq" key in authorizationCodes object should have the same values as the object stored in requests`
 			)
