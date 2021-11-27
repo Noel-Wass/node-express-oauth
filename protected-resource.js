@@ -69,12 +69,13 @@ app.get('/user-info', (req, res) => {
 	for (let i = 0; i < scopes.length; i++) {
 		let scopes2 = scopes[i].split(':');
 		if (scopes2.length === 2 && scopes2[0] === 'permissions') {
+			console.log('This point reached.')
 			const field = scopes2[1];
 			if (field in user)
 				userWithRestrictedFields[field] = user[field];
 		}		
     }
-	return res.json(userWithRestrictedFields);
+	return res.staus(200).json(userWithRestrictedFields);
 	
 })
 
