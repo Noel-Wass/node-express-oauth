@@ -61,7 +61,7 @@ app.get('/user-info', (req, res) => {
 		return;
 	}
 
-	const user = users[userInfo.username];
+	const user = users[userInfo.userName];
 	const scope = userInfo.scope;
 	const userWithRestrictedFields = {}
 	console.log(`scope: ${scope}`)
