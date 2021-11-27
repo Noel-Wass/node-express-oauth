@@ -59,7 +59,22 @@ app.get('/user-info', (req, res) => {
 	if (userInfo === null) {
 		res.status(401).send("Error: client not authorized.");
 		return;
+	}
+
+	const user = users[userInfo.username];
+	const scope = userInfo.scope;
+	const userWithRestrictedFields = {}
+
+	let scopes = scope.split(' ');
+	for (let i = 0; i < scopes.length && valid; i++) {
+		let scopes2 = scopes[i].split(':');
+		if (scopes2.length === 2 && scopes2[0] === 'permissions') {
+			const field = scopes2[1];
+			if (field in user)
+				userWithRestrictedFields[field] = user[field];
+		}		
     }
+	res.json(userWithRestrictedFields);
 	
 })
 
