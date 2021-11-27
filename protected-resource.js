@@ -74,7 +74,7 @@ app.get('/user-info', (req, res) => {
 				userWithRestrictedFields[field] = user[field];
 		}		
     }
-	res.json(userWithRestrictedFields);
+	return res.json(userWithRestrictedFields);
 	
 })
 
