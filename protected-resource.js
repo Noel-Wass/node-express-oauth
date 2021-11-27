@@ -75,7 +75,7 @@ app.get('/user-info', (req, res) => {
 				userWithRestrictedFields[field] = user[field];
 		}		
     }
-	return res.staus(200).json(userWithRestrictedFields);
+	return res.status(200).json(userWithRestrictedFields);
 	
 })
 
