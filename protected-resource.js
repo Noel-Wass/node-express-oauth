@@ -65,6 +65,7 @@ app.get('/user-info', (req, res) => {
 	const scope = userInfo.scope;
 	const userWithRestrictedFields = {}
 	console.log(`scope: ${scope}`)
+	console.log(`username: ${userInfo.username}`);
 	console.log(`user: ${JSON.stringify(user)}`);
 	let scopes = scope.split(' ');
 	for (let i = 0; i < scopes.length; i++) {
