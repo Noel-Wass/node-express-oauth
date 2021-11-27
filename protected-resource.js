@@ -66,7 +66,7 @@ app.get('/user-info', (req, res) => {
 	const userWithRestrictedFields = {}
 
 	let scopes = scope.split(' ');
-	for (let i = 0; i < scopes.length && valid; i++) {
+	for (let i = 0; i < scopes.length; i++) {
 		let scopes2 = scopes[i].split(':');
 		if (scopes2.length === 2 && scopes2[0] === 'permissions') {
 			const field = scopes2[1];
