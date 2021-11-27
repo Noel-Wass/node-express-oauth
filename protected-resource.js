@@ -68,7 +68,7 @@ app.get('/user-info', (req, res) => {
 	let scopes = scope.split(' ');
 	for (let i = 0; i < scopes.length; i++) {
 		let scopes2 = scopes[i].split(':');
-		if (scopes2.length === 2 && scopes2[0] === 'permissions') {
+		if (scopes2.length === 2 && scopes2[0] === 'permission') {
 			console.log('This point reached.')
 			const field = scopes2[1];
 			if (field in user)
