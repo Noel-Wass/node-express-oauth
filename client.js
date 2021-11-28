@@ -33,14 +33,14 @@ app.get('/authorize', (req, res) => {
 	
 	
 	const params = new URLSearchParams();
-	params.append('response_type', 'code');
-	params.append('client_id', config.clientId);
-	params.append('redirect_uri', config.redirectUri);
-	params.append('scope', 'permission:name permission:date_of_birth');
-	params.append('state', state);
+	params.set('response_type', 'code');
+	params.set('client_id', config.clientId);
+	params.set('redirect_uri', config.redirectUri);
+	params.set('scope', 'permission:name permission:date_of_birth');
+	params.set('state', state);
 
 	const redirectUrl = url.parse(config.authorizationEndpoint);
-	redirectUrl.query = params;
+	redirectUrl.query = params.values;
 
 	res.redirect(redirectUrl);
 })
