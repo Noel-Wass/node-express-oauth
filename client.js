@@ -40,7 +40,7 @@ app.get('/authorize', (req, res) => {
 	params.set('state', state);
 
 	const redirectUrl = url.parse(config.authorizationEndpoint);
-	redirectUrl.query = params.values;
+	redirectUrl.search = params.toString();
 
 	res.redirect(redirectUrl);
 })
