@@ -45,7 +45,10 @@ app.get('/authorize', (req, res) => {
 
 
 app.get('/callback', (eq, res) => {
-
+	if (!req.query.state || req.query.state !== state) {
+		res.status(403).send('Error: client has insufficent permissions to access resource');
+		return;
+    }
 })
 
 const server = app.listen(config.port, "localhost", function () {
