@@ -47,7 +47,7 @@ app.get('/authorize', (req, res) => {
 	const redirectUrl = new URL(config.authorizationEndpoint);
 	redirectUrl.searchParams = params;
 
-	res.redirect(redirectUrl);
+	res.redirect(encodeURI(redirectUrl));
 })
 
 const server = app.listen(config.port, "localhost", function () {
