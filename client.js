@@ -31,18 +31,16 @@ Your code here
 app.get('/authorize', (req, res) => {
 	state = randomString();
 
-	const myURL = new URL(config.authorizationEndpoint);
-	const searchParams = myURL.searchParams;
+	const redirectURL = new URL(config.authorizationEndpoint);
+	const searchParams = redirectURL.searchParams;
 
-	//const searchParams = new URLSearchParams(config.authorizationEndpoint);
 	searchParams.set('response_type', 'code');
 	searchParams.set('client_id', config.clientId);
 	searchParams.set('redirect_uri', config.redirectUri);
 	searchParams.set('scope', 'permission:name permission:date_of_birth');
 	searchParams.set('state', state);
-	console.log(`searchParams.toString(): ${searchParams.toString()}`);
-
-	res.redirect(myURL);
+	
+	res.redirect(redirectURL);
 })
 
 const server = app.listen(config.port, "localhost", function () {
