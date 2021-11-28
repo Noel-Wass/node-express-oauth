@@ -37,8 +37,9 @@ app.get('/authorize', (req, res) => {
 	redirectUrl.set('redirect_uri', config.redirectUri);
 	redirectUrl.set('scope', 'permission:name permission:date_of_birth');
 	redirectUrl.set('state', state);
+	console.log(`redirectUrl.toString(): ${redirectUrl.toString()}`);
 
-	res.redirect(encodeURI(redirectUrl));
+	res.redirect(encodeURI(redirectUrl.toString()));
 })
 
 const server = app.listen(config.port, "localhost", function () {
