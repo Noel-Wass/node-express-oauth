@@ -30,7 +30,10 @@ Your code here
 
 app.get('/authorize', (req, res) => {
 	state = randomString();
+
 	
+
+	//redirectUrl.searchParams = new URLSearchParams();
 	
 	const params = new URLSearchParams();
 	params.set('response_type', 'code');
@@ -39,8 +42,10 @@ app.get('/authorize', (req, res) => {
 	params.set('scope', 'permission:name permission:date_of_birth');
 	params.set('state', state);
 
-	const redirectUrl = url.parse(config.authorizationEndpoint);
-	redirectUrl.search = params.toString();
+	//const redirectUrl = url.parse(config.authorizationEndpoint);
+	//const redirectUrl = new URL()
+	const redirectUrl = new URL(config.authorizationEndpoint);
+	redirectUrl.searchParams = params;
 
 	res.redirect(redirectUrl);
 })
