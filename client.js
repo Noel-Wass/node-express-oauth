@@ -31,21 +31,12 @@ Your code here
 app.get('/authorize', (req, res) => {
 	state = randomString();
 
-	
-
-	//redirectUrl.searchParams = new URLSearchParams();
-	
-	const params = new URLSearchParams();
-	params.set('response_type', 'code');
-	params.set('client_id', config.clientId);
-	params.set('redirect_uri', config.redirectUri);
-	params.set('scope', 'permission:name permission:date_of_birth');
-	params.set('state', state);
-
-	//const redirectUrl = url.parse(config.authorizationEndpoint);
-	//const redirectUrl = new URL()
-	const redirectUrl = new URL(config.authorizationEndpoint);
-	redirectUrl.searchParams = params;
+	const redirectUrl = new URLSearchParams(config.authorizationEndpoint);
+	redirectUrl.set('response_type', 'code');
+	redirectUrl.set('client_id', config.clientId);
+	redirectUrl.set('redirect_uri', config.redirectUri);
+	redirectUrl.set('scope', 'permission:name permission:date_of_birth');
+	redirectUrl.set('state', state);
 
 	res.redirect(encodeURI(redirectUrl));
 })
