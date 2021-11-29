@@ -70,7 +70,15 @@ app.get('/callback', (req, res) => {
 				authorization: 'bearer ' + response.data.access_token
 			}
         })
+	})
+	.then((response) => {
+		res.render("welcome", { user: response.data})
+	})
+	.catch((err) => {
+		console.error(err);
+		res.status(500).send('Error: something went wrong.');
     })
+
 })
 
 const server = app.listen(config.port, "localhost", function () {
