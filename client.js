@@ -72,11 +72,11 @@ app.get('/callback', (req, res) => {
         })
 	})
 	.then((response) => {
-		res.render("welcome", { user: response.data})
+		return res.render("welcome", { user: response.data})
 	})
 	.catch((err) => {
 		console.error(err);
-		res.status(500).send('Error: something went wrong.');
+		return res.status(500).send('Error: something went wrong.');
     })
 
 })
