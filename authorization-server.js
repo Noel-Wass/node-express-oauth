@@ -3,7 +3,7 @@ const express = require("express")
 const bodyParser = require("body-parser")
 const jwt = require("jsonwebtoken")
 const url = require("url")
-const private_key = import ('./assets/private_key.pm')
+
 
 const {
 	randomString,
