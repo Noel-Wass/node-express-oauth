@@ -48,7 +48,29 @@ app.get('/callback', (req, res) => {
 	if (!req.query.state || req.query.state !== state) {
 		res.status(403).send('Error: client has insufficent permissions to access resource');
 		return;
-    }
+	}
+	const { code } = req.query;
+	axios({
+		method: 'POST',
+		url: config.tokenEndpoint,
+		auth: {
+			username: config.clientId,
+			password: config.clientSecret
+		},
+		data: {
+			code: code
+		},
+		validateStatus: null
+	})
+	.then((response) => {
+		return axios({
+			method: 'GET',
+			url: config.userInfoEndpoint,
+			headers: {
+				authorization: 'bearer ' + response.data.access_token
+			}
+        })
+    })
 })
 
 const server = app.listen(config.port, "localhost", function () {
